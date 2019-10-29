@@ -14,4 +14,13 @@ def business(request):
 
 
 def new_business(request):
-    return render(request,'new_business.html',locals())
+    return render(request,'new_business.html',locals)
+
+
+def profile(request):
+    return render(request,'profile.html',locals())
+
+
+def edit_profile(request):
+    return render(request,'edit_profile.html',locals())
+
