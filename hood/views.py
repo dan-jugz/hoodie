@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User
+from .forms import ProfileForm, BusinessForm, NeighbourHoodForm, PostForm
 from django.contrib.auth.decorators import login_required
 from .models import Business,UserProfile,NeighbourHood,Post
 
@@ -29,7 +30,16 @@ def index(request):
 def post(request,id):
     post = Post.objects.get(id = id)
     comments = Comment.objects.filter(post = post)
-    form = CommentForm(request.POST)
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.user = request.user
+            comment.post = post
+            comment.save()
+        return redirect('post', id)
+    else:
+        form = CommentForm()
     context = {
         'post': post,
         'form': form,
