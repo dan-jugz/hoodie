@@ -112,7 +112,19 @@ def profile(request):
 @login_required(login_url='/accounts/login')
 def edit_profile(request):
     profile = UserProfile.objects.get(user=request.user)
-    form = ProfileForm()
+    if request.method == 'POST':
+        form = ProfileForm(request.POST,instance=profile)
+        if form.is_valid():
+            profile = form.save(commit=False)
+            profile.user = request.user
+            profile.save()
+        return redirect('profile', username = request.user)
+    else:
+        if UserProfile.objects.filter(user=request.user):
+            profile = UserProfile.objects.get(user=request.user)
+            form = ProfileForm(instance=profile)
+        else:
+            form = ProfileForm()
     context = {
         "form":form
     }
