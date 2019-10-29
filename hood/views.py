@@ -42,7 +42,7 @@ def new_post(request):
     } 
     return render(request,'new_post.html', context)
 
-    
+
 @login_required(login_url='/accounts/login')
 def business(request):
     profile = UserProfile.objects.get(user = request.user)
@@ -84,3 +84,17 @@ def edit_profile(request):
     }
     return render(request,'edit_profile.html',context)
 
+
+@login_required(login_url='/accounts/login')
+def search(request):
+    if 'business' in request.GET and request.GET['business']:
+        profile = UserProfile.objects.get(user = request.user)
+        search_term = request.GET.get('business')
+        results = Business.objects.filter(neighbourhood = profile.neighbourhood, name__icontains = search_term)
+        message = f'{search_term}'
+        context = {
+            'message': message,
+            'results': results
+        }
+        
+    return render(request, 'search.html', context)
