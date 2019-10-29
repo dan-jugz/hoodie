@@ -23,7 +23,14 @@ def index(request):
 @login_required(login_url='/accounts/login')
 def post(request,id):
     post = Post.objects.get(id = id)
-    return render(request, 'post.html', locals())
+    comments = Comment.objects.filter(post = post)
+    form = CommentForm(request.POST)
+    context = {
+        'post': post,
+        'form': form,
+        'comments': comments
+    }
+    return render(request, 'post.html', context)
 
 
 @login_required(login_url='/accounts/login')
