@@ -7,10 +7,15 @@ from .models import Business,UserProfile,NeighbourHood,Post
 @login_required(login_url='/accounts/login')
 def index(request):
     current_user = request.user
+    businesses = Business.objects.filter(neighbourhood = profile.neighbourhood)
+    hood = profile.neighbourhood
+    posts = Post.objects.filter(neighbourhood = profile.neighbourhood)
     profile = UserProfile.objects.get(user = current_user)
-
     context = {
-        "profile":profile,
+        "posts":posts,
+        "profile":profile, 
+        "businesses": businesses, 
+        "hood": hood
     }
     return render(request,'index.html', context)
 
