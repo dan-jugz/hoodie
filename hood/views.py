@@ -10,7 +10,12 @@ def index(request):
     businesses = Business.objects.filter(neighbourhood = profile.neighbourhood)
     hood = profile.neighbourhood
     posts = Post.objects.filter(neighbourhood = profile.neighbourhood)
-    profile = UserProfile.objects.get(user = current_user)
+    try:
+        profile = UserProfile.objects.get(user = current_user)
+    except:
+        profile = UserProfile.objects.create(name = request.user.username, user = request.user)
+        profile.save()
+        return redirect('edit_profile',username = current_user.username)
     context = {
         "posts":posts,
         "profile":profile, 
