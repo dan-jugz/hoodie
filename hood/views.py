@@ -4,5 +4,11 @@ from django.shortcuts import render
 def index(request):
     return render(request,'index.html', locals())
 
+
 def post(request):
     return render(request, 'post.html', locals())
+
+
+def business(request):
+    return render(request, 'business.html',locals())
+
