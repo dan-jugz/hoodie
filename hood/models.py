@@ -32,3 +32,14 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Business(models.Model):
+    name = models.CharField(max_length = 30)
+    email = models.EmailField(max_length = 30)
+    description = models.TextField(null=True)
+    user = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+    neighbourhood = models.ForeignKey(NeighbourHood, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
