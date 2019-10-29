@@ -48,9 +48,19 @@ def post(request,id):
     return render(request, 'post.html', context)
 
 
+@login_required(login_url='/accounts/login')
 def new_post(request):
     profile = UserProfile.objects.get(user = request.user)
-    form = PostForm()
+    if request.method == 'POST':
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.user = request.user
+            post.neighbourhood = profile.neighbourhood
+            post.save()
+        return redirect('index')
+    else:
+        form = PostForm()
     context = {
         "profile":profile,
         "form":form
