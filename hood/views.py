@@ -81,7 +81,16 @@ def business(request):
 @login_required(login_url='/accounts/login')
 def new_business(request):
     profile = UserProfile.objects.get(user = request.user)
-    form = BusinessForm()
+    if request.method == 'POST':
+        form = BusinessForm(request.POST)
+        if form.is_valid():
+            business = form.save(commit=False)
+            business.user = profile
+            business.neighbourhood = profile.neighbourhood
+            business.save()
+        return redirect('business')
+    else:
+        form = BusinessForm()
     context = {
         'form': form
     }
