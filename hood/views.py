@@ -55,7 +55,14 @@ def new_business(request):
 
 @login_required(login_url='/accounts/login')
 def profile(request):
-    return render(request,'profile.html',locals())
+    user = User.objects.get(username = username)
+    profile = UserProfile.objects.get(user = user)
+    businesses = Business.objects.filter(user = profile)
+    context = {
+        'profile': profile,
+        'businesses': businesses
+    }
+    return render(request,'profile.html',context)
 
 
 @login_required(login_url='/accounts/login')
