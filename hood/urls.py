@@ -8,4 +8,5 @@ urlpatterns = [
     url(r'^edit_profile/(?P<username>\w{0,50})$', views.edit_profile,name='edit_profile'),
     url(r'^post/(\d+)$', views.post, name='post'),
     url(r'^new_post$', views.new_post, name='new_post'),
+    url(r'^new_business$', views.new_business, name='new_business')
     ]
