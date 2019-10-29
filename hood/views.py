@@ -12,3 +12,6 @@ def post(request):
 def business(request):
     return render(request, 'business.html',locals())
 
+
+def new_business(request):
+    return render(request,'new_business.html',locals())
