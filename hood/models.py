@@ -43,3 +43,15 @@ class Business(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Post(models.Model):
+    hood_image = models.ImageField(upload_to = 'hood/', blank=True)
+    title = models.CharField(max_length = 50)
+    content = models.TextField()
+    user = models.ForeignKey(User,on_delete = models.CASCADE)
+    neighbourhood = models.ForeignKey(NeighbourHood,on_delete = models.CASCADE)
+    pub_date = models.DateTimeField(auto_now_add=True,null=True)
+
+    def __str__(self):
+        return self.title
