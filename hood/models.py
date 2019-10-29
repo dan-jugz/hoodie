@@ -23,6 +23,19 @@ class NeighbourHood(models.Model):
         self.delete()
 
 
+    @classmethod
+    def find_neighborhood(cls,neigborhood_id):
+        neighborhood = cls.objects.get(id = neigborhood_id)
+        return neighborhood
+
+    def update_neighborhood(self):
+        self.save()
+
+    def update_occupants(self):
+        self.occupants += 1
+        self.save()
+
+
 class UserProfile(models.Model):
     name = models.CharField(max_length = 50)
     neighbourhood = models.ForeignKey(NeighbourHood, on_delete=models.CASCADE, null=True)
