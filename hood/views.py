@@ -33,6 +33,16 @@ def post(request,id):
     return render(request, 'post.html', context)
 
 
+def new_post(request):
+    profile = UserProfile.objects.get(user = request.user)
+    form = PostForm()
+    context = {
+        "profile":profile,
+        "form":form
+    } 
+    return render(request,'new_post.html', context)
+
+    
 @login_required(login_url='/accounts/login')
 def business(request):
     profile = UserProfile.objects.get(user = request.user)
@@ -67,5 +77,10 @@ def profile(request):
 
 @login_required(login_url='/accounts/login')
 def edit_profile(request):
-    return render(request,'edit_profile.html',locals())
+    profile = UserProfile.objects.get(user=request.user)
+    form = ProfileForm()
+    context = {
+        "form":form
+    }
+    return render(request,'edit_profile.html',context)
 
