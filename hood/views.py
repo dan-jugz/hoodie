@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
 from .forms import ProfileForm, BusinessForm, NeighbourHoodForm, PostForm
 from django.contrib.auth.decorators import login_required
@@ -8,15 +8,15 @@ from .models import Business,UserProfile,NeighbourHood,Post
 @login_required(login_url='/accounts/login')
 def index(request):
     current_user = request.user
-    businesses = Business.objects.filter(neighbourhood = profile.neighbourhood)
-    hood = profile.neighbourhood
-    posts = Post.objects.filter(neighbourhood = profile.neighbourhood)
     try:
         profile = UserProfile.objects.get(user = current_user)
     except:
         profile = UserProfile.objects.create(name = request.user.username, user = request.user)
         profile.save()
-        return redirect('edit_profile',username = current_user.username)
+    businesses = Business.objects.filter(neighbourhood = profile.neighbourhood)
+    hood = profile.neighbourhood
+    posts = Post.objects.filter(neighbourhood = profile.neighbourhood)
+    return redirect('edit_profile',username = current_user.username)
     context = {
         "posts":posts,
         "profile":profile, 
@@ -110,7 +110,7 @@ def profile(request):
 
 
 @login_required(login_url='/accounts/login')
-def edit_profile(request):
+def edit_profile(request,username):
     profile = UserProfile.objects.get(user=request.user)
     if request.method == 'POST':
         form = ProfileForm(request.POST,instance=profile)
