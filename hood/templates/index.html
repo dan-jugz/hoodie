@@ -1,1 +1,56 @@
-<p>umefika homepage</p>
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+<div class="container"style="overflow-y:scroll;height: 90vh;margin-top: 90px;">
+    <div class="text-center">
+        <h1>Welcome to {{hood}} Estate!!!</h1>
+    </div>
+    <a class="btn btn-danger"href="#contactsmodal" data-toggle="modal" data-target="#exampleModal">Emergency Contacts!</a>
+    
+    {% if posts %}
+    <div class="row my-4">
+        {% for post in posts%}
+        <div class="col-md-6">
+            <div class="card">
+                
+                <div class="card-body">
+                    <h2 class="card-title">{{post.title}}</h2>
+                    <p class="card-text">{{post.content}}</p>
+                    <p class="card-text">Posted by: <a href="{% url 'profile' post.user %}">{{post.user}}</a></p>
+                    <!-- <a href="{% url 'post' post.id %}" class="btn btn-secondary">Read More</a> -->
+                </div>
+            </div>
+        </div>
+        {% endfor%}
+    </div>
+    {% else %}
+        <h2 class="text-center">No posts available.</h2>
+    {% endif %}
+    
+</div>
+
+<div class="modal left fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-notify modal-danger" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Emergency contacts!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Langata Police: 999-000-111</p>
+                <p>Estate gaurd: 079-651-204</p>
+                <p>St Mary Ambulance Service: 655-512-000</p>
+                <p>Bomas Fire Brigade: 004-562-000</p>
+                
+            </div>
+            <div class="modal-footer">
+                <p>Note that this numbers do not need credit to contact!!</p> 
+            </div>
+        </div>
+    </div>
+  </div>
+
+ 
+{% endblock %}
