@@ -45,7 +45,7 @@ def post(request,id):
         'form': form,
         'comments': comments
     }
-    return render(request, 'post.html', context)
+    return render(request, 'index.html', context)
 
 
 @login_required(login_url='/accounts/login')
