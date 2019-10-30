@@ -8,16 +8,13 @@
     -o-transform: translate3d(0%, 0, 0);
     transform: translate3d(0%, 0, 0);
 }
-
 .modal.left .modal-content {
     height: 100%;
     overflow-y: auto;
 }
-
 .modal.left .modal-body {
     padding: 15px 15px 80px;
 }
-
 .modal.left.fade .modal-dialog {
     left: -320px;
     -webkit-transition: opacity 0.3s linear, left 0.3s ease-out;
@@ -25,24 +22,24 @@
     -o-transition: opacity 0.3s linear, left 0.3s ease-out;
     transition: opacity 0.3s linear, left 0.3s ease-out;
 }
-
 .modal.left.fade.show .modal-dialog {
     left: 0;
 }
 /* ----- MODAL STYLE ----- */
-    .modal-content {
-        border-radius: 0;
-        border: #e2b08c;
+	.modal-content {
+		border-radius: 0;
+		border: #e2b08c;
     background-color: #e2b08c;
+	}
+	.modal-header {
+		border-bottom-color: #e2b08c;
+		background-image:url('https://images.pexels.com/photos/129731/pexels-photo-129731.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500');
     }
-
-    .modal-header {
-        border-bottom-color: #e2b08c;
-        background-image:url('https://images.pexels.com/photos/129731/pexels-photo-129731.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500');
-    }
-
 nav{
-    font-family: 'Kaushan Script';
-    background-color: #e2b08c;
-    content: 20px;
-    }
+        font-family: 'Kaushan Script';
+        background-color: #e2b08c;
+        content: 20px;
+        }
+.card{
+    padding: 20px;
+}
