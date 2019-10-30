@@ -1,1 +1,32 @@
-<p>no dirty biznis here.</p>
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+    <div class="container">
+           
+        {% if businesses %}
+        <div class="text-center">
+                <h1>Businesses in the hood!!</h1>
+            </div>
+                    {% for business in businesses %}
+                        <div class="col-md-6">
+                                <div class="card">                                    
+                                    <div class="card-body">
+                                            Name:<h2 class="card-title">{{business.name}}</h2>
+                                            Description:<p class="card-text">{{business.description}}</p>
+                                            Owner:<p class="card-text">{{business.user}}</p>
+                            
+                                    </div>
+                                </div>
+                            </div>
+
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        
+        {% else%}
+        <h1 class="text-center">No business.</h1>
+        {% endif%}
+       
+    </div>
+{% endblock %}
